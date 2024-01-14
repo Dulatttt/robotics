@@ -1,0 +1,35 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}Презентации{% endblock %}
+
+{% block content %}
+<section id="lessons" class="border-blue m-3 p-3">
+    <div class="container">
+        {% if user.is_authenticated %}
+        <h1 class="blue-dark-text mb-4">Презентации</h1>
+        <div class="table-responsive-sm">
+            <table class="table align-middle table-bordered border-dark">
+                <tr>
+                    <th scope="row">№</th>
+                    <th scope="row">Тема</th>
+                    <th scope="row">Действие</th>
+                </tr>
+                {% for presentation in presentations %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ presentation.lessonTheme }}</td>
+                    <td><a href="{% url 'presentationDetail' pk=presentation.pk %}" class="primary-button d-block text-center">Смотреть</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <div class="bg-blue-dark p-5">
+            Чтобы получить доступ к курсу войдити по <a href="#" class="author">ссылке</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

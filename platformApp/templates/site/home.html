@@ -1,0 +1,38 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<section id="main" class="border-blue m-3 p-3">
+    <div class="container">
+        {% if messages %}
+            <div class="alert alert-dark alert-dismissible fade show" style="width: 50%; margin: 0 auto;" role="alert">
+              {% for message in messages %}
+                {{ message }}
+              {% endfor %}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-7">
+                <div class="relative-block">
+                    <h1>Интерактивная платформа <span class="blue-dark-text">iRobotics</span></h1>
+                    {% for c in content %}
+                    <p>{{ c }}</p>
+                    {% endfor %}
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'lessonsPage' %}" class="primary-button">Приступить к работе</a>
+                    {% else %}
+                    <a href="{% url 'logIn' %}" class="primary-outline-button">Войти</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="img-container">
+                    <img src="{% static './img/main.svg' %}" alt="Main">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

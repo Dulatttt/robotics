@@ -1,0 +1,35 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block title %}О проекте{% endblock %}
+
+{% block content %}
+<section id="lessons" class="border-blue m-3 p-3">
+    <div class="container">
+        {% if user.is_authenticated %}
+        <h1 class="blue-dark-text mb-4">Обучение</h1>
+        <div class="table-responsive-sm">
+            <table class="table align-middle table-bordered border-dark">
+                <tr>
+                    <th scope="row">№</th>
+                    <th scope="row">Тема</th>
+                    <th scope="row">Действие</th>
+                </tr>
+                {% for lesson in lessons %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ lesson.title }}</td>
+                    <td><a href="{% url 'lessonDetail' pk=lesson.pk %}" class="primary-button d-block text-center">Читать</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% else %}
+        <div class="bg-blue-dark p-5">
+            Чтобы получить доступ к курсу войдити по <a href="#" class="author">ссылке</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}
